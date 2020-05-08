@@ -62,7 +62,7 @@ const checkA11y = (
     })
     .then(violations => {
       if (!skipFailures) {
-        assert.equal(
+        assert.isAtMost(
           violations.length,
           failureThreshold,
           `${violations.length} accessibility violation${
