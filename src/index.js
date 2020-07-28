@@ -19,7 +19,8 @@ const checkA11y = (
   options,
   violationCallback,
   skipFailures = false,
-  failureThreshold = 0
+  failureThreshold = 0,
+  countTotal = false
 ) => {
   cy.window({ log: false })
     .then(win => {
@@ -62,12 +63,16 @@ const checkA11y = (
     })
     .then(violations => {
       if (!skipFailures) {
+        let numViolations = violations.length;
+        if (countTotal) {
+          numViolations = violations.reduce((acc, cur) => acc + cur.nodes.length, 0);
+        }
         assert.isAtMost(
-          violations.length,
+          numViolations,
           failureThreshold,
-          `${violations.length} accessibility violation${
-            violations.length === 1 ? '' : 's'
-          } ${violations.length === 1 ? 'was' : 'were'} detected`
+          `${numViolations}${countTotal ? ' total' : ''} accessibility violation${
+            numViolations === 1 ? '' : 's'
+          } ${numViolations === 1 ? 'was' : 'were'} detected`
         )
       } else {
         if (violations.length) {

@@ -112,6 +112,11 @@ Reference : https://github.com/avanslaars/cypress-axe/issues/17
 
 Allows you to configure the number of violations that will cause the assertion to fail. This should be used as a temporary measure while you address accessibility violations, but can help validate that you're not regressing as you progress towards 0 violations. 
 
+
+###### countTotal (optional, defaults to false)
+
+Allows you to configure if the `failureThreshold` is measured against the count of unique issues or the count of total issues. By default, it is measured against the unique number of violations, rather than the total. Similar to the `failureThreshold`, this should only be used as a temporary measure. 
+
 ### Examples
 
 #### Basic usage
